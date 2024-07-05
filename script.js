@@ -1,4 +1,3 @@
-let humanChoice = +prompt("1 = rock, 2 = paper, 3 = scissors")
 let humanScore = 0
 let computerScore = 0
 
@@ -14,6 +13,7 @@ const getComputerChoice = () => {
 }
 
 const getHumanChoice = () => {
+    let humanChoice = +prompt("1 = rock, 2 = paper, 3 = scissors")
     if (humanChoice == 1) {
         return "rock"
     } else if (humanChoice == 2) {
@@ -25,7 +25,24 @@ const getHumanChoice = () => {
     }
 }
 
-console.log(getHumanChoice())
+let playRound = () => {
+    let humanChoice = getHumanChoice()
+    let computerChoice = getComputerChoice()
+    if (humanChoice == "rock" && computerChoice == "scissors" || humanChoice == "paper" && computerChoice == "rock" || humanChoice == "scissors" && computerChoice == "paper") {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        humanScore++
+    } else {
+        console.log(`You Lose! ${computerChoice} beats ${humanChoice}.`)
+        computerScore++
+    }
 
+    console.log(`Player score: ${humanScore}. Computer score: ${computerScore}`)
+}
+
+playRound()
+playRound()
+playRound()
+playRound()
+playRound()
 
 
