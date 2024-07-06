@@ -1,3 +1,8 @@
+const rock = document.getElementById("rock")
+const paper = document.getElementById("paper")
+const scissors = document.getElementById("scissors")
+let results = document.getElementById("results")
+
 let humanScore = 0
 let computerScore = 0
 
@@ -12,37 +17,44 @@ const getComputerChoice = () => {
     }
 }
 
-const getHumanChoice = () => {
-    let humanChoice = +prompt("1 = rock, 2 = paper, 3 = scissors")
-    if (humanChoice == 1) {
-        return "rock"
-    } else if (humanChoice == 2) {
-        return "paper"
-    } else if (humanChoice == 3) {
-        return "scissors"
-    } else {
-        alert("refresh and start again dumbass")
-    }
-}
+let playRound = (e) => {
 
-let playRound = () => {
-    let humanChoice = getHumanChoice()
+    results.innerHTML = ""
+    let humanChoice = e
     let computerChoice = getComputerChoice()
     if (humanChoice == "rock" && computerChoice == "scissors" || humanChoice == "paper" && computerChoice == "rock" || humanChoice == "scissors" && computerChoice == "paper") {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        results.innerHTML += `<p>You win! ${humanChoice} beats ${computerChoice}.</p>`
         humanScore++
     } else {
-        console.log(`You Lose! ${computerChoice} beats ${humanChoice}.`)
+        results.innerHTML += `<p>You Lose! ${computerChoice} beats ${humanChoice}.</p>`
         computerScore++
     }
 
-    console.log(`Player score: ${humanScore}. Computer score: ${computerScore}`)
+    results.innerHTML += `<p>Player score: ${humanScore}. Computer score: ${computerScore}</p>`
+    if (humanScore == 5) {
+        humanScore = 0
+        computerScore = 0
+        results.innerHTML = "<p>You win uwu</p>"
+        
+    } else if (computerScore == 5) {
+        humanScore = 0
+        computerScore = 0
+        results.innerHTML = "<p>You lose :((</p>"
+        
+    }
 }
 
-playRound()
-playRound()
-playRound()
-playRound()
-playRound()
 
+
+rock.addEventListener("click", e => {
+    playRound("rock")
+})
+
+paper.addEventListener("click", e => {
+    playRound("paper")
+})
+
+scissors.addEventListener("click", e => {
+    playRound("scissors")
+})
 
